@@ -19,7 +19,8 @@ module Packer
             (reduce_mtu ? Provisioners::INSTALL_CF_FEATURES_REDUCE_MTU : Provisioners::INSTALL_CF_FEATURES_2016)
           ]
         end
-        install_windows_updates = if skip_windows_update then [] else [Provisioners.install_windows_updates] end
+        install_windows_updates = []
+        # install_windows_updates = if skip_windows_update then [] else [Provisioners.install_windows_updates] end
         pre + install_windows_updates + [Provisioners::PROTECT_CF_CELL, Provisioners::INSTALL_SSHD]
       end
 
@@ -32,8 +33,8 @@ module Packer
           provisioners += Provisioners.sysprep_shutdown(iaas)
         else
           provisioners = [
-            Provisioners::OPTIMIZE_DISK,
-            Provisioners::COMPRESS_DISK
+            # Provisioners::OPTIMIZE_DISK,
+            # Provisioners::COMPRESS_DISK
           ] + provisioners
         end
 
